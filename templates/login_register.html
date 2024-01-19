@@ -6,11 +6,24 @@
     <form action="" method="post">
         {% csrf_token %}
         <label>UserName: </label>
-        <input type="text" name="usrname" placeholder="Enter User Name...."/>
-        <label>UserName: </label>
-        <input type="text" name="password" placeholder="Password"/>
+        <input type="text" name="usrname" placeholder="Enter User Name...." />
+        <label>Password: </label>
+        <input type="text" name="password" placeholder="Password" />
         <input type="submit" value="login">
     </form>
+
+    <p>Haven't signed up yet</p>
+    <a href="{% url 'register' %}">Sign up</a>
+
+</div>
+
+<div>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="register">
+    </form>
+    <p>Already signed up</p>
+    <a href="{% url 'login' %}">Sign up</a>
 </div>
 
 {% endblock content %}
