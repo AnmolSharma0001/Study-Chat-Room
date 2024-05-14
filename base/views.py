@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 
 
 def loginPage(request):
@@ -16,9 +17,9 @@ def loginPage(request):
         return redirect('home')
 
     if request.method == 'POST':
-        username = request.POST.get('Username')
-        password = request.POST.get('Password')
-
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
         try:
             user = User.objects.get(username=username)
         except:
@@ -41,9 +42,22 @@ def logoutUser(request):
     logout(request)
     return redirect('home')
 
-def register_user(request):
+def registerUser(request):
     page = 'register'
-    return render(request, "login_register.html")
+    form = UserCreationForm()
+
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            login(request, user)
+            return redirect('home')
+        else :
+            messages.error(request, 'An error occured during registration')
+
+    return render(request, "login_register.html", {'form': form})
 
 
 
