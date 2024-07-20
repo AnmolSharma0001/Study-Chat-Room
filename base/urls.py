@@ -13,6 +13,7 @@ urlpatterns = [
     path("login/", views.loginPage, name='login'),
     path("logout/", views.logoutUser, name='logout'),
     path("register/", views.registerUser, name='register'),
+    path("update-user/", views.updateUser, name='update-user'),
     path("delete-message/<str:pk>/", views.deleteMessage, name='delete-message'),
     
 ]

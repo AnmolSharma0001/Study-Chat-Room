@@ -20,7 +20,7 @@
           <h3>Study Room</h3>
         </div>
 
-        {% if room.host == request.user %}
+        {% if room.host.id == request.user.id %}
         <div class="room__topRight">
           <a href="{% url 'update-room' room.id %}">
             <svg enable-background="new 0 0 24 24" height="32" viewBox="0 0 24 24" width="32"
@@ -126,7 +126,10 @@
         </div>
       </div>
       <div class="room__message">
-        <form action="#"><input name="" placeholder="Write your message here..." /></form>
+        <form action="" method="POST">
+          {% csrf_token %}
+          <input name="body" placeholder="Write your message here..." />
+        </form>
       </div>
     </div>
     <!-- Room End -->
