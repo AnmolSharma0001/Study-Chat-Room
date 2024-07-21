@@ -26,8 +26,6 @@ class Room(models.Model):
     def __str__(self):
         return str(self.name)
 
-    def __repr__(self) -> str:
-        return super().__repr__(self.name)
     
 
 class Message(models.Model):
